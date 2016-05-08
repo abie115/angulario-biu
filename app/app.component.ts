@@ -1,46 +1,37 @@
-import { Component, OnInit } from '@angular/core';
-import { Set } from './model/set';
+import { Component }       from '@angular/core';
+import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
 import { SetService } from './service/set.service';
-import { SetListComponent } from './set-list.component';
+import { SetsComponent } from './component/sets.component';
+import { SetDetailsComponent } from './component/set-details.component';
 
 @Component({
   selector: 'my-app',
-  template:`
+  template: `
     <h1>{{title}}</h1>
-    <h2>My Sets</h2>
-    <ul class="sets">
-      <li *ngFor="#set of sets"  [class.selected]="set === selectedSet"
-        (click)="onSelect(set)">
-        <span class="details">{{set.id}}</span> {{set.name}}
-        <ul>
-            <li *ngFor='#word of set.word'>
-                Eng: {{word.eng}}, Pl: {{word.pl}}
-            </li>
-        </ul>
-      </li>
-    </ul>
-  <set-words [set]="selectedSet"></set-words>
-  
+    <a [routerLink]="['Sets']">Sets</a>
+    <router-outlet></router-outlet>
   `,
-  directives: [SetListComponent],
-     providers: [SetService]
+ directives: [ROUTER_DIRECTIVES],
+ providers: [
+  ROUTER_PROVIDERS,
+  SetService
+]
 })
-export class AppComponent implements OnInit {
-    title = 'Sets of English Words';
-    sets : Set[];
-  //set: Set;
-    selectedSet: Set;
-    constructor(private setService: SetService) { }
-    onSelect(set: Set) { this.selectedSet = set; }
-    
-    getSets() {
-         this.sets = this.setService.getSets();
-    }
-    
-    ngOnInit() {
-        this.getSets();
-    }
-    
-   
-}
 
+@RouteConfig([
+  {
+    path: '/detail/:id',
+    name: 'SetDetails',
+    component: SetDetailsComponent
+  },
+  {
+    path: '/sets',
+    name: 'Sets',
+    component: SetsComponent,
+    useAsDefault: true
+  }
+])
+
+export class AppComponent {
+  title = 'Sets of words';
+}
