@@ -1,35 +1,51 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router-deprecated';
-
 import { Set } from '../model/set';
 import { SetService } from '../service/set.service';
 import { SetDetailsComponent } from './set-details.component';
 
 @Component({
-  selector: 'my-sets',
-  templateUrl: 'app/component/sets.component.html',
-  directives: [SetDetailsComponent]
+    selector: 'my-sets',
+    templateUrl: 'app/component/sets.component.html',
+    directives: [SetDetailsComponent]
 })
+
 export class SetsComponent implements OnInit {
+
     sets: Set[];
-  selectedSet: Set;
+    selectedSet: Set;
+    errorMessage: string;
+    
 
-  constructor(
-    private router: Router,
-    private setService: SetService) { }
+    constructor(
+        private router: Router,
+        private setService: SetService) { }
 
-  getSets() {
-    this.setService.getSets().then(sets => this.sets = sets);
-  }
 
-  ngOnInit() {
-    this.getSets();
-  }
+    ngOnInit() {
+        console.log("ddddd " + this.sets);
+        this.getSets();
+    }
 
-  onSelect(set: Set) { this.selectedSet = set; }
+    getSets() {
+        this.setService.getSets()
+            .subscribe(
+            sets => this.sets = sets,
+            error => this.errorMessage = <any>error);
+    }
 
-  gotoDetail() {
-    this.router.navigate(['SetDetails', { id: this.selectedSet.id }]);
-  }
+    addSet(name: string) {
+        if (!name) { return; }
+        this.setService.addSet(name)
+            .subscribe(
+            set => this.sets.push(set),
+            error => this.errorMessage = <any>error);
+    }
+    
+    onSelect(set: Set) { this.selectedSet = set; }
+
+    gotoDetail() {
+        this.router.navigate(['SetDetails', { id: this.selectedSet.id }]);
+    }
 }
 

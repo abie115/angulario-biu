@@ -1,19 +1,21 @@
 <h1>{{title}}</h1>
 <h2>My Sets</h2>
+<div class="error" *ngIf="errorMessage">{{errorMessage}}</div>
+New Set:
+<input #newSet />
+<button (click)="addSet(newSet.value); newSet.value=''">Add Set</button>
 <ul class="sets">
-  <li *ngFor="#set of sets"  [class.selected]="set === selectedSet"
-    (click)="onSelect(set)">
-    <span class="details">{{set.id}}</span> {{set.name}}
-    <ul>
-        <li *ngFor='#word of set.word'>
-            Eng: {{word.eng}}, Pl: {{word.pl}}
-        </li>
-    </ul>
-  </li>
+    <li *ngFor="#set of sets"  [class.selected]="set === selectedSet" (click)="onSelect(set)">
+        <span class="details">{{set.id}}</span>
+        {{set.name}}
+        <ul>
+            <li *ngFor='#word of set.word'>
+            ENG: {{word.eng}}, PL: {{word.pl}}
+            </li>
+        </ul>
+    </li>
 </ul>
-  <div *ngIf="selectedSet">
-  <h2>
-    {{selectedSet.name | uppercase}}
-  </h2>
-  <button (click)="gotoDetail()">View Details</button>
+<div *ngIf="selectedSet">
+    <h2>{{selectedSet.name | uppercase}}</h2>
+    <button (click)="gotoDetail()">View Details</button>
 </div>

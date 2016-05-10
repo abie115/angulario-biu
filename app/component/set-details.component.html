@@ -1,20 +1,22 @@
+<div class="error" *ngIf="errorMessage">{{errorMessage}}</div>
 <div *ngIf="set">
-  <h2>{{set.name}}</h2>
-  <div><label>id: </label>{{set.id}}</div>
-  <div>
-    <label>name: </label>
-    <input [(ngModel)]="set.name" placeholder="name"/>
-  </div>
-  <ul>
+    <h2>{{set.name}}</h2>
+        <div><label>id: </label>{{set.id}}</div>
+    <div>
+        <label>Set name: </label>
+        <input [(ngModel)]="set.name" placeholder="name" (ngModelChange)="isChanged()"/>
+    </div>
+    <ul>
         <li *ngFor='#word of set.word'>
             ENG: 
-            <input [(ngModel)]="word.eng" placeholder="eng"/>
+            <input [(ngModel)]="word.eng" placeholder="eng" (ngModelChange)="isChanged()"/>
             PL:  
-            <input [(ngModel)]="word.pl" placeholder="pl"/>
+            <input [(ngModel)]="word.pl" placeholder="pl" (ngModelChange)="isChanged()"/>
         </li>
     </ul>
+    <button [disabled]="disabled" (click)="updateSet()">Save</button>    
     <input #eng >
     <input #pl >
     <button (click)="addWord(eng,pl)">Add word </button>
-  <button (click)="goBack()">Back</button>  
+    <button (click)="goBack()">Back</button>  
 </div>
