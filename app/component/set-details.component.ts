@@ -13,7 +13,7 @@ export class SetDetailsComponent implements OnInit {
     set: Set;
     errorMessage: string;
     public disabled: boolean = true;
-    
+
     constructor(
         private setService: SetService,
         private routeParams: RouteParams) {
@@ -27,7 +27,7 @@ export class SetDetailsComponent implements OnInit {
             error => this.errorMessage = <any>error
         );
     }
-    
+
     updateSet() {
         this.setService.updateSet(this.set)
             .subscribe(
@@ -35,18 +35,34 @@ export class SetDetailsComponent implements OnInit {
             error => console.log(error)
             );
     }
-    
-   isChanged() {
-       this.disabled = false;
-       console.log("button disabled: "+ this.disabled);
+
+    addWord(eng, pl) {
+        if (!this.set.word) {
+            this.set.word = [{ "eng": eng, "pl": pl }];
+            this.setService.updateSet(this.set)
+                .subscribe(
+                set => { },
+                error => console.log(error)
+                );
+            console.log("puste " + this.set.word);
+        } else {
+            console.log("pelne " + this.set.word);
+            this.set.word.push({ "eng": eng, "pl": pl });
+            this.setService.updateSet(this.set)
+                .subscribe(
+                set => { },
+                error => console.log(error)
+                );
+            console.log("eng " + eng + "pl " + pl + " set " + this.set.word);
+        }
     }
-    
+
+    isChanged() {
+        this.disabled = false;
+        console.log("button disabled: " + this.disabled);
+    }
+
     goBack() {
         window.history.back();
-    }
-    
-    addWord(eng, pl) {
-        this.set.word.push({ "eng": eng.value, "pl": pl.value });
-        console.log(eng.value + ": " + pl.value);
     }
 }

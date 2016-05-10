@@ -17,6 +17,6 @@
     <button [disabled]="disabled" (click)="updateSet()">Save</button>    
     <input #eng >
     <input #pl >
-    <button (click)="addWord(eng,pl)">Add word </button>
+    <button (click)="addWord(eng.value,pl.value); eng.value='';pl.value=''">Add word </button>
     <button (click)="goBack()">Back</button>  
 </div>
