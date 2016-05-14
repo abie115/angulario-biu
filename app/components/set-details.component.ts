@@ -13,7 +13,11 @@ export class SetDetailsComponent implements OnInit {
     set: Set;
     errorMessage: string;
     public disabled: boolean = true;
-   
+    submitted = false;
+
+    onSubmit() {
+        this.submitted = true;
+    }
     constructor(
         private setService: SetService,
         private routeParams: RouteParams) {
@@ -44,17 +48,16 @@ export class SetDetailsComponent implements OnInit {
                 set => { },
                 error => console.log(error)
                 );
-            console.log("puste " + this.set.word);
         } else {
-            console.log("pelne " + this.set.word);
             this.set.word.push({ "eng": eng, "pl": pl });
             this.setService.updateSet(this.set)
                 .subscribe(
                 set => { },
                 error => console.log(error)
                 );
-            console.log("eng " + eng + "pl " + pl + " set " + this.set.word);
         }
+
+
     }
 
     isChanged() {
