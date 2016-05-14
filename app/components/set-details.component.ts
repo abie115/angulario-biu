@@ -13,7 +13,7 @@ export class SetDetailsComponent implements OnInit {
     set: Set;
     errorMessage: string;
     public disabled: boolean = true;
-
+   
     constructor(
         private setService: SetService,
         private routeParams: RouteParams) {

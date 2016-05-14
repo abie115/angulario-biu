@@ -3,6 +3,8 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/route
 import { SetService } from './service/set.service';
 import { SetsComponent } from './components/sets.component';
 import { SetDetailsComponent } from './components/set-details.component';
+import { SetFlashCardsComponent } from './components/set-flashcards.component';
+
 
 import { HTTP_PROVIDERS }    from '@angular/http';
 import { provide }           from '@angular/core';
@@ -41,6 +43,11 @@ import { SetData }          from './set-data';
         name: 'Sets',
         component: SetsComponent,
         useAsDefault: true
+    },
+     {
+        path: '/flashcards/:id',
+        name: 'FlashCards',
+        component: SetFlashCardsComponent
     }
 ])
 

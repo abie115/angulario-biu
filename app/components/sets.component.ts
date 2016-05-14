@@ -3,11 +3,12 @@ import { Router } from '@angular/router-deprecated';
 import { Set } from '../model/set';
 import { SetService } from '../service/set.service';
 import { SetDetailsComponent } from './set-details.component';
+import { SetFlashCardsComponent } from './set-flashcards.component';
 
 @Component({
     selector: 'my-sets',
     templateUrl: 'app/components/sets.component.html',
-    directives: [SetDetailsComponent]
+    directives: [SetDetailsComponent, SetFlashCardsComponent]
 })
 
 export class SetsComponent implements OnInit {
@@ -46,6 +47,10 @@ export class SetsComponent implements OnInit {
 
     gotoDetail() {
         this.router.navigate(['SetDetails', { id: this.selectedSet.id }]);
+    }
+    
+     gotoFlashCards() {
+        this.router.navigate(['FlashCards', { id: this.selectedSet.id }]);
     }
 }
 

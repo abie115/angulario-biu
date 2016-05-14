@@ -15,7 +15,7 @@
         </li>
     </ul>
     <button [disabled]="disabled" (click)="updateSet()">Save</button>    
-    <input #eng >
+    <input #eng>
     <input #pl >
     <button (click)="addWord(eng.value,pl.value); eng.value='';pl.value=''">Add word </button>
     <button (click)="goBack()">Back</button>  

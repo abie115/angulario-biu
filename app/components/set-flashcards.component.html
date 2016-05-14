@@ -1,0 +1,34 @@
+<div class="error" *ngIf="errorMessage">{{errorMessage}}</div>
+<button (click)="english()" [disabled]="disabledEng">English</button>
+<button (click)="polish()" [disabled]="disabledPl">Polish</button>
+
+<div *ngIf="set">
+    <h2>{{set.name}}</h2>
+    <div *ngIf="clickEnglish">
+        <div class="translate" style="width:100px; height:50px; border:1px solid black">
+            <div *ngIf="showTranslate">
+                <div *ngIf="selectedSet"> {{selectedSet.pl}}</div>
+            </div>
+        </div>
+        <ul class="words">
+            <li *ngFor='#word of set.word' [class.selected]="word === selectedSet" (click)="onSelect(word)">
+                ENG:
+                <label>{{word.eng}}</label>
+            </li>
+        </ul>
+    </div>
+    <div *ngIf="clickPolish">
+        <div class="translate" style="width:100px; height:50px; border:1px solid black">
+            <div *ngIf="showTranslate">
+                <div *ngIf="selectedSet"> {{selectedSet.eng}}</div>
+            </div>
+        </div>
+        <ul class="words">
+            <li *ngFor='#word of set.word' [class.selected]="word === selectedSet" (click)="onSelect(word)">
+                PL:
+                <label>{{word.pl}}</label>
+            </li>
+        </ul>
+    </div>
+</div>
+<button (click)="goBack()">Back</button>
