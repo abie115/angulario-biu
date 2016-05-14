@@ -5,7 +5,7 @@ import { Set } from '../model/set';
 
 @Component({
     selector: 'set-words',
-    templateUrl: 'app/component/set-details.component.html'
+    templateUrl: 'app/components/set-details.component.html'
 })
 
 export class SetDetailsComponent implements OnInit {

@@ -6,7 +6,7 @@ import { SetDetailsComponent } from './set-details.component';
 
 @Component({
     selector: 'my-sets',
-    templateUrl: 'app/component/sets.component.html',
+    templateUrl: 'app/components/sets.component.html',
     directives: [SetDetailsComponent]
 })
 

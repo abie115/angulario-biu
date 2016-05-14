@@ -1,8 +1,8 @@
 import { Component }       from '@angular/core';
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
 import { SetService } from './service/set.service';
-import { SetsComponent } from './component/sets.component';
-import { SetDetailsComponent } from './component/set-details.component';
+import { SetsComponent } from './components/sets.component';
+import { SetDetailsComponent } from './components/set-details.component';
 
 import { HTTP_PROVIDERS }    from '@angular/http';
 import { provide }           from '@angular/core';
