@@ -8,6 +8,7 @@ import { SetFlashCardsComponent } from './set-flashcards.component';
 @Component({
     selector: 'my-sets',
     templateUrl: 'app/components/sets.component.html',
+    styleUrls: ['style.css'],
     directives: [SetDetailsComponent, SetFlashCardsComponent]
 })
 

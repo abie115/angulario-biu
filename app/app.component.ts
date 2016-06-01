@@ -15,9 +15,14 @@ import { InMemoryBackendService,
 import { SetData }          from './set-data';
 @Component({
     selector: 'my-app',
+    styleUrls: ['style.css'],
     template: `
     <h1>{{title}}</h1>
-    <a [routerLink]="['Sets']">Sets</a>
+    <nav>
+        <ul class="top">
+            <li><a [routerLink]="['Sets']">Sets</a></li>
+        </ul>
+    </nav>
     <router-outlet></router-outlet>
   `,
     directives: [ROUTER_DIRECTIVES],

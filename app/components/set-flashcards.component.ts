@@ -5,6 +5,7 @@ import { Set } from '../model/set';
 
 @Component({
     selector: 'set-words',
+    styleUrls: ['style.css'],
     templateUrl: 'app/components/set-flashcards.component.html'
 })
 

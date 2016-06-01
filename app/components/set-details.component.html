@@ -1,12 +1,23 @@
-<div class="error" *ngIf="errorMessage">{{errorMessage}}</div>
-<div *ngIf="set">
+<div class="box" *ngIf="set">
     <h2>{{set.name}}</h2>
-    <div><label>id: </label>{{set.id}}</div>
+    <form #wordForm="ngForm">
+        <input required
+               ngControl="eng" #eng="ngForm" placeholder="ENG">
+        <input required
+               ngControl="pl" #pl="ngForm" placeholder="PL">       
+        <button type="submit" [disabled]="!wordForm.form.valid" (click)="addWord(eng.value, pl.value)">Add word </button>
+         <div [hidden]="pl.valid || pl.pristine">
+            polish word is required
+        </div>
+        <div [hidden]="eng.valid || eng.pristine">
+            english word is required
+        </div>
+    </form>
     <div>
-        <label>Set name: </label>
+        <label>Name: </label>
         <input [(ngModel)]="set.name" placeholder="name" (ngModelChange)="isChanged()" />
     </div>
-    <ul>
+    <ul class="sets">
         <li *ngFor='#word of set.word'>
             ENG:
             <input [(ngModel)]="word.eng" placeholder="eng" (ngModelChange)="isChanged()" />
@@ -14,20 +25,8 @@
             <input [(ngModel)]="word.pl" placeholder="pl" (ngModelChange)="isChanged()" />
         </li>
     </ul>
-    <button [disabled]="disabled" (click)="updateSet()">Save</button>  
-    <form  #wordForm="ngForm">
-        <input required
-               ngControl="eng" #eng="ngForm">
-        <input required
-               ngControl="pl" #pl="ngForm">
-        <div [hidden]="pl.valid || pl.pristine">
-            polish word is required
-        </div>
-        <div [hidden]="eng.valid || eng.pristine">
-            english word is required
-        </div>
-        <button type="submit" [disabled]="!wordForm.form.valid" (click)="addWord(eng.value, pl.value)">Add word </button>
-
-    </form>
+   
+    
+     <button (click)="updateSet()">Save</button>  
     <button (click)="goBack()">Back</button>
 </div>
