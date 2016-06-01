@@ -40,6 +40,18 @@ export class SetService {
             .map(res => { })
             .catch(this.handleError)
     }
+    
+     deleteSet(set: Set) {
+        let body = JSON.stringify({ id: set.id, name: set.name, word: set.word });
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+         console.log('delete: ' + set);
+
+        return this.http.delete(this.url+'/'+set.id ,options)
+            .map(res => { })
+            .catch(this.handleError)
+    }
+    
 
     private handleError(error: any) {
         let errMsg = error.message || 'Server error';

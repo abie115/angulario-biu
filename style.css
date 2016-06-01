@@ -31,6 +31,16 @@ newset{
     width:300px;
    
 }
+
+.delete{
+    background-color:#e02f2f;
+    border-color:#b71111;    
+    border-radius: 4px;
+}
+.delete:hover{
+     border-color:#b71111; 
+     background-color:#b71111; 
+}
 button{
     height:5%;
     width:15%;

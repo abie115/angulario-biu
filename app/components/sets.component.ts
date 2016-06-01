@@ -16,8 +16,7 @@ export class SetsComponent implements OnInit {
 
     sets: Set[];
     selectedSet: Set;
-    errorMessage: string;
-    
+
 
     constructor(
         private router: Router,
@@ -33,7 +32,7 @@ export class SetsComponent implements OnInit {
         this.setService.getSets()
             .subscribe(
             sets => this.sets = sets,
-            error => this.errorMessage = <any>error);
+            error => console.error(error));
     }
 
     addSet(name: string) {
@@ -41,16 +40,32 @@ export class SetsComponent implements OnInit {
         this.setService.addSet(name)
             .subscribe(
             set => this.sets.push(set),
-            error => this.errorMessage = <any>error);
+            error => console.error(error));
     }
-    
+
+    deleteSet(set: Set) {
+        this.setService.deleteSet(set)
+            .subscribe(
+            resp => this.removeSetFromList(set),
+            error => console.error(error)
+            );
+    }
+
+    removeSetFromList(set) {
+        if (set == this.selectedSet) {
+            this.selectedSet = null;
+        }
+        let id = this.sets.indexOf(set);
+        this.sets.splice(id, 1);
+    }
+
     onSelect(set: Set) { this.selectedSet = set; }
 
     gotoDetail() {
         this.router.navigate(['SetDetails', { id: this.selectedSet.id }]);
     }
-    
-     gotoFlashCards() {
+
+    gotoFlashCards() {
         this.router.navigate(['FlashCards', { id: this.selectedSet.id }]);
     }
 }

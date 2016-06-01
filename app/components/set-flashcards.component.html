@@ -5,7 +5,7 @@
 
     <div *ngIf="clickEnglish">
         <div class="translate">
-            <div  *ngIf="showTranslate">
+            <div *ngIf="showTranslate">
                 <div *ngIf="selectedSet"> {{selectedSet.pl}}</div>
             </div>
         </div>
@@ -30,7 +30,6 @@
         </ul>
     </div>
     <div>
-    <button (click)="goBack()">Back</button>
-        </div>
+        <button (click)="goBack()">Back</button>
+    </div>
 </div>
-

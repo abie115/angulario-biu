@@ -16,13 +16,16 @@
     <div>
         <label>Name: </label>
         <input [(ngModel)]="set.name" placeholder="name" (ngModelChange)="isChanged()" />
+
+      
     </div>
     <ul class="sets">
         <li *ngFor='#word of set.word'>
             ENG:
-            <input [(ngModel)]="word.eng" placeholder="eng" (ngModelChange)="isChanged()" />
+            <input [(ngModel)]="word.eng" #eng placeholder="eng" (ngModelChange)="isChanged()" />
             PL:
-            <input [(ngModel)]="word.pl" placeholder="pl" (ngModelChange)="isChanged()" />
+            <input [(ngModel)]="word.pl" #pl placeholder="pl" (ngModelChange)="isChanged()" />
+            <button  (click)="deleteWord(eng.value, pl.value)">Delete</button>
         </li>
     </ul>
    

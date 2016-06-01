@@ -13,7 +13,7 @@ export class SetDetailsComponent implements OnInit {
 
     set: Set;
     errorMessage: string;
-   // public disabled: boolean = true;
+    // public disabled: boolean = true;
     submitted = false;
 
     onSubmit() {
@@ -27,7 +27,6 @@ export class SetDetailsComponent implements OnInit {
 
     ngOnInit() {
         let id = +this.routeParams.get('id');
-        // this.getSet(id);
         this.setService.getSet(id).subscribe(
             set => this.set = set,
             error => this.errorMessage = <any>error
@@ -37,7 +36,7 @@ export class SetDetailsComponent implements OnInit {
     updateSet() {
         this.setService.updateSet(this.set)
             .subscribe(
-            set => { /*this.disabled = true;*/ },
+            set => { },
             error => console.log(error)
             );
         this.gotoSets();
@@ -53,18 +52,46 @@ export class SetDetailsComponent implements OnInit {
                 );*/
         } else {
             this.set.word.push({ "eng": eng, "pl": pl });
-          /*  this.setService.updateSet(this.set)
-                .subscribe(
-                set => { },
-                error => console.log(error)
-                );*/
+            /*  this.setService.updateSet(this.set)
+                  .subscribe(
+                  set => { },
+                  error => console.log(error)
+                  );*/
         }
+    }
 
+    deleteWord(eng, pl) {
+        let confirm = window.confirm("Are you sure to delete");
+        if (confirm) {
+            for (var i = 0; i < this.set.word.length; i++) {
+                if (this.set.word[i].eng == eng && this.set.word[i].pl == pl) {
+                    console.log("rowne :" + this.set.word[i].pl + " " + this.set.word[i].eng);
+                    this.set.word.splice(i, 1);
+                }
+            }
+        }
 
     }
 
+    deleteSet(set) {
+       
+       let tmp = this.set;
+       let tmpService = this.setService;
+        delete this.set;
+    
+        tmpService.deleteSet(tmp)
+            .subscribe(
+            set => { },
+            error => console.log(error)
+            );
+        this.gotoSets();
+      //  console.log("zestawy " + this.set);
+        
+      /// console.log(set);
+    }
+
     isChanged() {
-       // this.disabled = false;
+        // this.disabled = false;
         //console.log("button disabled: " + this.disabled);
     }
 
@@ -72,8 +99,8 @@ export class SetDetailsComponent implements OnInit {
         window.history.back();
         this.gotoSets();
     }
-    
-    gotoSets(){
-        this.router.navigate(['Sets' ]);
+
+    gotoSets() {
+        this.router.navigate(['Sets']);
     }
 }
