@@ -13,7 +13,7 @@ export class SetDetailsComponent implements OnInit {
 
     set: Set;
     errorMessage: string;
-    // public disabled: boolean = true;
+    active = true;
     submitted = false;
 
     onSubmit() {
@@ -33,6 +33,7 @@ export class SetDetailsComponent implements OnInit {
         );
     }
 
+
     updateSet() {
         this.setService.updateSet(this.set)
             .subscribe(
@@ -48,6 +49,8 @@ export class SetDetailsComponent implements OnInit {
         } else {
             this.set.word.push({ "eng": eng, "pl": pl });
         }
+        this.active = false;
+        setTimeout(() => this.active = true, 0);
     }
 
     deleteWord(eng, pl) {

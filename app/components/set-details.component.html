@@ -1,32 +1,30 @@
 <div class="main" *ngIf="set">
     <h2>{{set.name}}</h2>
-    <form #wordForm="ngForm">
-        <input required
-               ngControl="eng" #eng="ngForm" placeholder="ENG">
-        <input required
-               ngControl="pl" #pl="ngForm" placeholder="PL">       
-        <button type="submit" [disabled]="!wordForm.form.valid" (click)="addWord(eng.value, pl.value)">Add word </button>
-         <div [hidden]="pl.valid || pl.pristine">
+    <form #wordForm="ngForm" *ngIf="active" (ngSubmit)="addWord(eng.value, pl.value)">
+        <input required ngControl="eng" #eng="ngForm" placeholder="ENG">
+        <input required ngControl="pl" #pl="ngForm" placeholder="PL">
+        <button type="submit" [disabled]="!wordForm.form.valid" >Add word </button>
+        <div [hidden]="pl.valid || pl.pristine">
             polish word is required
         </div>
         <div [hidden]="eng.valid || eng.pristine">
             english word is required
         </div>
+
     </form>
     <div>
         <label>Name: </label>
-        <input [(ngModel)]="set.name" placeholder="name" />      
+        <input [(ngModel)]="set.name" placeholder="name" />
     </div>
     <ul class="set">
         <li *ngFor='#word of set.word'>
             ENG:
-            <input [(ngModel)]="word.eng" #eng placeholder="eng" />
-            PL:
-            <input [(ngModel)]="word.pl" #pl placeholder="pl"  />
-            <button  (click)="deleteWord(eng.value, pl.value)">Delete</button>
+            <input [(ngModel)]="word.eng" #eng placeholder="eng" /> PL:
+            <input [(ngModel)]="word.pl" #pl placeholder="pl" />
+            <button (click)="deleteWord(eng.value, pl.value)">Delete</button>
         </li>
-    </ul>  
-    
-     <button (click)="updateSet()">Save</button>  
-     <button (click)="goBack()">Back</button>
+    </ul>
+
+    <button (click)="updateSet()">Save</button>
+    <button (click)="goBack()">Back</button>
 </div>
