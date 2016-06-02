@@ -1,4 +1,4 @@
-<div class="box" *ngIf="set">
+<div class="main" *ngIf="set">
     <h2>{{set.name}}</h2>
     <button (click)="english()">English</button>
     <button (click)="polish()">Polish</button>
@@ -6,10 +6,10 @@
     <div *ngIf="clickEnglish">
         <div class="translate">
             <div *ngIf="showTranslate">
-                <div *ngIf="selectedSet"> {{selectedSet.pl}}</div>
+                <p *ngIf="selectedSet"> {{selectedSet.pl}}</p>
             </div>
         </div>
-        <ul class="words">
+        <ul class="setflash">
             <li *ngFor='#word of set.word' [class.selected]="word === selectedSet" (click)="onSelect(word)">
                 ENG:
                 <label>{{word.eng}}</label>
@@ -19,10 +19,10 @@
     <div *ngIf="clickPolish">
         <div class="translate">
             <div *ngIf="showTranslate">
-                <div *ngIf="selectedSet"> {{selectedSet.eng}}</div>
+                <p *ngIf="selectedSet"> {{selectedSet.eng}}</p>
             </div>
         </div>
-        <ul class="words">
+        <ul class="setflash">
             <li *ngFor='#word of set.word' [class.selected]="word === selectedSet" (click)="onSelect(word)">
                 PL:
                 <label>{{word.pl}}</label>

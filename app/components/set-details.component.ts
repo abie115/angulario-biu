@@ -29,7 +29,7 @@ export class SetDetailsComponent implements OnInit {
         let id = +this.routeParams.get('id');
         this.setService.getSet(id).subscribe(
             set => this.set = set,
-            error => this.errorMessage = <any>error
+            error => console.error(error)
         );
     }
 
@@ -45,18 +45,8 @@ export class SetDetailsComponent implements OnInit {
     addWord(eng, pl) {
         if (!this.set.word) {
             this.set.word = [{ "eng": eng, "pl": pl }];
-            /*this.setService.updateSet(this.set)
-                .subscribe(
-                set => { },
-                error => console.log(error)
-                );*/
         } else {
             this.set.word.push({ "eng": eng, "pl": pl });
-            /*  this.setService.updateSet(this.set)
-                  .subscribe(
-                  set => { },
-                  error => console.log(error)
-                  );*/
         }
     }
 
@@ -71,28 +61,6 @@ export class SetDetailsComponent implements OnInit {
             }
         }
 
-    }
-
-    deleteSet(set) {
-       
-       let tmp = this.set;
-       let tmpService = this.setService;
-        delete this.set;
-    
-        tmpService.deleteSet(tmp)
-            .subscribe(
-            set => { },
-            error => console.log(error)
-            );
-        this.gotoSets();
-      //  console.log("zestawy " + this.set);
-        
-      /// console.log(set);
-    }
-
-    isChanged() {
-        // this.disabled = false;
-        //console.log("button disabled: " + this.disabled);
     }
 
     goBack() {

@@ -1,20 +1,10 @@
-<div class="container">
-    <div class="newset">
-        <input class="newsetinput" #newSet placeholder="New set" />
-        <button (click)="addSet(newSet.value); newSet.value=''">Add Set</button>
-    </div>
+<div class="main">
+    <input class="newsetinput" #newSet placeholder="New set" />
+    <button (click)="addSet(newSet.value); newSet.value=''">Add Set</button>
     <ul class="sets">
         <li *ngFor="#set of sets" [class.selected]="set === selectedSet" (click)="onSelect(set)">
-            <div class="set">
-                <span class="details">{{set.name}}</span>
-                <ul class="words">
-                    <li *ngFor='#word of set.word'>
-                        ENG: {{word.eng}}, PL: {{word.pl}}
-                    </li>
-                </ul>
-            </div>
+            <span>{{set.name}}</span>
         </li>
-
     </ul>
     <div *ngIf="selectedSet">
         <h2>{{selectedSet.name | uppercase}}</h2>

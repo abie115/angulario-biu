@@ -4,8 +4,6 @@ import { SetService } from './service/set.service';
 import { SetsComponent } from './components/sets.component';
 import { SetDetailsComponent } from './components/set-details.component';
 import { SetFlashCardsComponent } from './components/set-flashcards.component';
-
-
 import { HTTP_PROVIDERS }    from '@angular/http';
 import { provide }           from '@angular/core';
 import { XHRBackend }        from '@angular/http';
@@ -17,7 +15,6 @@ import { SetData }          from './set-data';
     selector: 'my-app',
     styleUrls: ['style.css'],
     template: `
-    <h1>{{title}}</h1>
     <nav>
         <ul class="top">
             <li><a [routerLink]="['Sets']">Sets</a></li>
@@ -33,13 +30,12 @@ import { SetData }          from './set-data';
         // in-memory web api providers
         provide(XHRBackend, { useClass: InMemoryBackendService }), // in-mem server
         provide(SEED_DATA, { useClass: SetData }) // in-mem server data
-
     ]
 })
 
 @RouteConfig([
     {
-        path: '/detail/:id',
+        path: 'set/detail/:id',
         name: 'SetDetails',
         component: SetDetailsComponent
     },
@@ -50,7 +46,7 @@ import { SetData }          from './set-data';
         useAsDefault: true
     },
      {
-        path: '/flashcards/:id',
+        path: 'set/flashcards/:id',
         name: 'FlashCards',
         component: SetFlashCardsComponent
     }
