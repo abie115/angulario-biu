@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouteParams } from '@angular/router-deprecated';
+import { RouteParams, Router } from '@angular/router-deprecated';
 import { SetService } from '../service/set.service';
 import { Set } from '../model/set';
 
@@ -14,7 +14,6 @@ export class SetFlashCardsComponent implements OnInit {
     set: Set;
     selectedSet: { eng: string, pl: string };
     errorMessage: string;
-    public disabled: boolean = true;
     showTranslate: boolean = false;
     
     clickEnglish: boolean =false;
@@ -22,7 +21,8 @@ export class SetFlashCardsComponent implements OnInit {
    
     constructor(
         private setService: SetService,
-        private routeParams: RouteParams) {
+        private routeParams: RouteParams,
+        private router: Router) {
     }
 
     ngOnInit() {
@@ -53,6 +53,11 @@ export class SetFlashCardsComponent implements OnInit {
     }
     
    goBack() {
-        window.history.back();
+        
+        this.gotoSets();
+    }
+
+    gotoSets() {
+        this.router.navigate(['Sets']);
     }
 }

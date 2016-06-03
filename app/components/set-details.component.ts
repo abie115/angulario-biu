@@ -14,11 +14,7 @@ export class SetDetailsComponent implements OnInit {
     set: Set;
     errorMessage: string;
     active = true;
-    submitted = false;
-
-    onSubmit() {
-        this.submitted = true;
-    }
+    
     constructor(
         private setService: SetService,
         private routeParams: RouteParams,
@@ -37,10 +33,9 @@ export class SetDetailsComponent implements OnInit {
     updateSet() {
         this.setService.updateSet(this.set)
             .subscribe(
-            set => { },
+            set => this.gotoSets(),
             error => console.log(error)
             );
-        this.gotoSets();
     }
 
     addWord(eng, pl) {
@@ -58,16 +53,13 @@ export class SetDetailsComponent implements OnInit {
         if (confirm) {
             for (var i = 0; i < this.set.word.length; i++) {
                 if (this.set.word[i].eng == eng && this.set.word[i].pl == pl) {
-                    console.log("rowne :" + this.set.word[i].pl + " " + this.set.word[i].eng);
                     this.set.word.splice(i, 1);
                 }
             }
         }
-
     }
 
     goBack() {
-        window.history.back();
         this.gotoSets();
     }
 

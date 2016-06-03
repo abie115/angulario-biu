@@ -6,11 +6,7 @@ import { SetDetailsComponent } from './components/set-details.component';
 import { SetFlashCardsComponent } from './components/set-flashcards.component';
 import { HTTP_PROVIDERS }    from '@angular/http';
 import { provide }           from '@angular/core';
-import { XHRBackend }        from '@angular/http';
-// in-memory web api imports
-import { InMemoryBackendService,
-    SEED_DATA }          from 'angular2-in-memory-web-api/core';
-import { SetData }          from './set-data';
+
 @Component({
     selector: 'my-app',
     styleUrls: ['style.css'],
@@ -26,10 +22,7 @@ import { SetData }          from './set-data';
     providers: [
         ROUTER_PROVIDERS,
         SetService,
-        HTTP_PROVIDERS,
-        // in-memory web api providers
-        provide(XHRBackend, { useClass: InMemoryBackendService }), // in-mem server
-        provide(SEED_DATA, { useClass: SetData }) // in-mem server data
+        HTTP_PROVIDERS
     ]
 })
 
@@ -45,7 +38,7 @@ import { SetData }          from './set-data';
         component: SetsComponent,
         useAsDefault: true
     },
-     {
+    {
         path: 'set/flashcards/:id',
         name: 'FlashCards',
         component: SetFlashCardsComponent
